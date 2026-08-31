@@ -1,0 +1,4 @@
+import { activityItems } from "@/data/activity";
+import { PanelTitle } from "@/components/ui/PanelTitle";
+
+export function ActivityTimeline(){return <section className="panel activityPanel" aria-label="Recent activity demo"><PanelTitle number="03" title="RECENT ACTIVITY" detail="DEMO DATA"/><p className="demoNotice">PLACEHOLDER PREVIEW · NO LIVE ACTIVITY CONNECTED</p><div className="timeline">{activityItems.map(item=>{const content=<><div className="timelineMark" aria-hidden="true"><span/><i/></div><div><small>{item.placeholder ? "DEMO / " : ""}{item.type.toUpperCase()}</small><p><strong>{item.title}</strong><br/>{item.description}</p><time>{item.timestamp}</time></div>{item.url?<b aria-hidden="true">↗</b>:null}</>;return item.url?<a className="activity" href={item.url} key={item.title}>{content}</a>:<article className="activity" key={item.title}>{content}</article>})}</div><p className="viewAll">API-READY DATA STRUCTURE</p></section>}

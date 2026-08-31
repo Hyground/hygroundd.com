@@ -1,0 +1,1 @@
+export function Header(){return <header className="topbar"><a className="wordmark" href="#home" aria-label="Hygroundd home"><span className="mark">H</span><span>HYGROUNDD</span></a><div className="topMeta"><span>PERSONAL PROJECT HUB</span><span>VERSION 1 · 2026</span></div></header>}
