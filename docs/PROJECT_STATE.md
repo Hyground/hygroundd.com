@@ -1,22 +1,17 @@
 # Project State
 
-## Implemented
-- Home V2, navegación responsive y rutas públicas base.
-- Sesión administrativa compartida en cookie HttpOnly.
-- `/login`, `/admin` protegido y Card Manager con demo público aislado.
-
-## Architecture Decisions
-- `src/lib/auth.ts` es la fuente única de auth.
-- El contenido futuro debe acceder mediante repositorio, no directamente desde UI.
-- Card Manager no persiste datos de usuario todavía.
+## Current
+- Tools Hub Home with responsive catalog, filters and category counts.
+- Centralized tools catalog: src/data/tools.ts.
+- Reusable ad placeholders: AdSlot.
+- /card remains untouched.
 
 ## Pending
-- ContentRepository, CRUD admin y persistencia compatible con serverless.
-- Rutas detalle de projects/posts y herramientas no implementadas.
-
-## Known Issues
-- El dashboard de Card Manager conserva cambios sólo mientras la página está abierta.
+- Global admin auth and dashboard.
+- Analytics/popularity data.
+- Real tools and tool detail routes.
+- AdSense integration and SEO expansion.
 
 ## Important Notes
-- Nunca exponer variables `CARD_ADMIN_*` ni `AUTH_SECRET`.
-- `/card` mantiene compatibilidad; público recibe sólo props demo desde el servidor.
+- Tools marked coming soon do not link to fake functionality.
+- No database or public accounts currently.

@@ -54,3 +54,9 @@ Fase 2 completa: Home minimalista, header responsive y rutas públicas base. Fas
 3. Implementar CRUD admin con persistencia serverless real.
 4. Añadir `/tools/card-manager` reutilizando `/card`.
 5. QA de auth, móvil y rutas administrativas.
+
+## Current Project Rules
+- `/card` is the current Card Manager: do not modify it unless explicitly requested.
+- Tools come from `src/data/tools.ts`; do not handwrite tool cards in pages.
+- Home must stay responsive. `AdSlot` is the single advertising abstraction.
+- No AdSense, public accounts, database, or unnecessary dependencies without an explicit request.
