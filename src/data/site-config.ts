@@ -1,8 +1,10 @@
+import logo from "@/app/logo/logoHygroundd.png";
+
 export const siteConfig = {
   name: "Hygroundd",
   tagline: "Herramientas online para todos.",
   description: "Herramientas online gratuitas para PDF, imágenes, documentos, estudiantes, oficina, utilidades y desarrollo.",
-  logo: null as string | null,
+  logo,
   navigation: [
     { label: "Inicio", href: "/" },
     { label: "Herramientas", href: "/tools" },
