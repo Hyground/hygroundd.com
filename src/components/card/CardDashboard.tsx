@@ -44,11 +44,9 @@ export function CardDashboard({ initialCard, isPrivate }: Props) {
     event.currentTarget.reset();
   }
 
-  async function logout() { await fetch("/api/auth/logout", { method: "POST" }); window.location.assign("/card"); }
   const metrics = [["LÍMITE", money(card.limit, card.currency)], ["SALDO USADO", money(used, card.currency)], ["DISPONIBLE", money(Math.max(0, card.limit - used), card.currency)], ["USO", `${((used / card.limit) * 100).toFixed(1)}%`], ["PRÓXIMO CORTE", dateLabel(cycle.cutoff)], ["PRÓXIMO PAGO", dateLabel(cycle.payment)]];
 
-  return <main className="cardShell">
-    <header className="cardHeader"><a className="wordmark" href="/"><span className="mark">H</span>HYGROUNDD</a><div><span>{isPrivate ? "MODO PRIVADO" : "MODO DEMO"}</span>{isPrivate ? <button onClick={logout}>SALIR</button> : <a href="/login">INICIAR SESIÓN</a>}</div></header>
+  return <section className="cardShell">
     {!isPrivate && <p className="demoNotice">MODO DEMO · DATOS FICTICIOS. INICIA SESIÓN PARA TU ESPACIO PRIVADO.</p>}
     <section className="cardIntro"><div><p className="cardKicker">01 / MIS TARJETAS</p><h1>GESTOR DE <span>TARJETAS</span></h1><p className="cardMuted">Elige una tarjeta para ver su saldo, compras y fechas de pago.</p></div><button className="cardButton" onClick={() => setShowNew(true)}>+ AGREGAR TARJETA</button></section>
     <section className="cardCards">{cards.map((item) => <button key={item.id} className={`creditCard ${item.id === card.id ? "selected" : ""}`} onClick={() => setActiveId(item.id)}><small>{item.currency} · CORTE DÍA {item.cutoffDay}</small><b>{item.name}</b><span>{money(Math.max(0, item.limit), item.currency)} límite</span><i>••••</i></button>)}</section>
@@ -62,7 +60,7 @@ export function CardDashboard({ initialCard, isPrivate }: Props) {
       <div className="cardPanel panel"><p className="cardKicker">05 / REGISTRAR PAGO</p><form className="cardForm" onSubmit={addPayment}><input name="amount" type="number" step="0.01" min="0.01" placeholder={`Monto en ${card.currency}`} required /><input name="date" type="date" defaultValue={todayInput()} required /><button className="cardButton">REGISTRAR PAGO</button></form><p className="cardMuted">Pagos registrados: {money(paid, card.currency)}</p></div>
     </section>
     <section className="cardPanel panel cardMovementPanel"><div className="cardTitle"><p className="cardKicker">06 / MOVIMIENTOS</p><small>CICLO · {dateLabel(cycle.start)} — {dateLabel(cycle.cutoff)}<br />Pago: {dateLabel(cycle.payment)}</small></div>{card.movements.length ? <div className="cardTable">{card.movements.map((movement) => { const dates = cycleFor(movement.date, card.cutoffDay, card.dueDay); return <article key={movement.id}><time>{movement.date}</time><b>{movement.description}</b><span>{movement.category}</span><strong>{money(movement.amount, movement.currency)}</strong><small>Corte {dateLabel(dates.cutoff)}<br />Pago {dateLabel(dates.payment)}</small><button onClick={() => update((item) => ({ ...item, movements: item.movements.map((value) => value.id === movement.id ? { ...value, status: value.status === "PENDING" ? "PAID" : "PENDING" } : value) }))}>{movement.status === "PENDING" ? "PENDIENTE" : "PAGADA"}</button><button className="cardDelete" aria-label="Eliminar movimiento" onClick={() => { if (confirm("¿Eliminar este movimiento?")) update((item) => ({ ...item, movements: item.movements.filter((value) => value.id !== movement.id) })); }}>×</button></article>; })}</div> : <p className="cardEmpty">AÚN NO HAY MOVIMIENTOS. REGISTRA UNA COMPRA PARA COMENZAR.</p>}</section>
-  </main>;
+  </section>;
 }
 
 function CardFields({ card, onSubmit, submit }: { card?: ManagedCard; onSubmit: (event: FormEvent<HTMLFormElement>) => void; submit: string }) {

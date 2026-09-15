@@ -1,4 +1,6 @@
 import { CardDashboard, type ManagedCard } from "@/components/card/CardDashboard";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import { getSession } from "@/lib/auth";
 
 const privateCard: ManagedCard = { id: "primary", name: "Banrural Clásica Sueña", limit: 3400, cutoffDay: 5, dueDay: "last", currency: "GTQ", movements: [], payments: [] };
@@ -8,5 +10,5 @@ export const dynamic = "force-dynamic";
 
 export default async function CardPage() {
   const isPrivate = Boolean(await getSession());
-  return <CardDashboard initialCard={isPrivate ? privateCard : demoCard} isPrivate={isPrivate} />;
+  return <main className="toolsShell"><Header /><CardDashboard initialCard={isPrivate ? privateCard : demoCard} isPrivate={isPrivate} /><Footer /></main>;
 }

@@ -57,6 +57,9 @@ Fase 2 completa: Home minimalista, header responsive y rutas públicas base. Fas
 
 ## Current Project Rules
 - `/card` is the current Card Manager: do not modify it unless explicitly requested.
+- **Current design rule:** Home is the visual source of truth; all tools reuse the Hygroundd design system.
+- **Assets:** tool assets are mapped centrally; never hardcode repeated paths and always provide a fallback when a custom asset is absent.
+- **Card:** `/card` functionality must not change without explicit request; its visual styling may use shared Hygroundd components.
 - Tools come from `src/data/tools.ts`; do not handwrite tool cards in pages.
 - Home must stay responsive. `AdSlot` is the single advertising abstraction.
 - No AdSense, public accounts, database, or unnecessary dependencies without an explicit request.
