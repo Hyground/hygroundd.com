@@ -1,11 +1,12 @@
-import { cookies } from "next/headers";
-import { CardDashboard } from "@/components/card/CardDashboard";
-import { CardLogin } from "@/components/card/CardLogin";
-import { cardSession, hasValidSession } from "@/lib/card-auth";
+import { CardDashboard, type ManagedCard } from "@/components/card/CardDashboard";
+import { getSession } from "@/lib/auth";
+
+const privateCard: ManagedCard = { id: "primary", name: "Banrural Clásica Sueña", limit: 3400, cutoffDay: 5, dueDay: "last", currency: "GTQ", movements: [], payments: [] };
+const demoCard: ManagedCard = { id: "demo", name: "Tarjeta de demostración", limit: 5000, cutoffDay: 12, dueDay: "last", currency: "GTQ", movements: [{ id: "demo-purchase", description: "Compra de ejemplo", amount: 425, currency: "GTQ", date: "2026-09-09", category: "Ejemplo", status: "PENDING" }], payments: [] };
 
 export const dynamic = "force-dynamic";
 
 export default async function CardPage() {
-  const session = (await cookies()).get(cardSession.name)?.value;
-  return hasValidSession(session) ? <CardDashboard /> : <CardLogin />;
+  const isPrivate = Boolean(await getSession());
+  return <CardDashboard initialCard={isPrivate ? privateCard : demoCard} isPrivate={isPrivate} />;
 }

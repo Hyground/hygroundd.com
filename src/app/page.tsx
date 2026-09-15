@@ -1,17 +1,10 @@
-import { ActivityTimeline } from "@/components/activity/ActivityTimeline";
+import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { Hero } from "@/components/layout/Hero";
-import { Resources } from "@/components/layout/Resources";
-import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { PointerEffect } from "@/components/ui/PointerEffect";
 
-export default function Home() {
-  return <div className="dashboard">
-    <div className="ambient ambientOne" aria-hidden="true"/><div className="ambient ambientTwo" aria-hidden="true"/>
-    <a className="skipLink" href="#main-content">SKIP TO CONTENT</a>
-    <Header/><main id="main-content"><Hero/>
-    <div className="contentGrid"><ProjectGrid/><Resources/><ActivityTimeline/></div></main>
-    <Footer/><PointerEffect/>
-  </div>;
+const tools = [{ number: "01", name: "Card Manager", detail: "Gestor y calculadora de crédito.", href: "/card", status: "Disponible" }, { number: "02", name: "Video Downloader", detail: "Arquitectura preparada para enlaces compatibles.", href: "/tools", status: "Próximamente" }, { number: "03", name: "PDF → Word", detail: "Conversión de documentos.", href: "/tools", status: "Próximamente" }];
+const projects = [{ name: "Hygroundd Hub", detail: "El espacio central para herramientas, proyectos y experimentos.", tag: "PLATAFORMA" }, { name: "Card Manager", detail: "Herramienta privada de control y planificación de crédito.", tag: "HERRAMIENTA" }];
+
+export default async function Home() {
+  return <main className="hubShell"><Header /><section className="hubHero"><p className="hubEyebrow">01 / PROJECT & TOOLS HUB</p><h1>HYGROUNDD</h1><h2>Tools, projects &amp; experiments.</h2><p>Herramientas y proyectos creados para resolver problemas reales.</p><div className="hubActions"><Link href="/tools">Explorar herramientas</Link><Link href="/projects">Ver proyectos</Link></div></section><section className="hubSection" id="tools"><div className="hubSectionHeading"><p className="hubEyebrow">02 / HERRAMIENTAS</p><h2>Herramientas destacadas</h2><Link href="/tools">Ver todas →</Link></div><div className="hubCards">{tools.map((tool) => <Link className="hubCard" href={tool.href} key={tool.name}><small>{tool.number} / {tool.status.toUpperCase()}</small><h3>{tool.name}</h3><p>{tool.detail}</p><span>→</span></Link>)}</div></section><section className="hubSection" id="projects"><div className="hubSectionHeading"><p className="hubEyebrow">03 / PROYECTOS</p><h2>Proyectos recientes</h2><Link href="/projects">Ver proyectos →</Link></div><div className="hubCards hubProjectCards">{projects.map((project, index) => <article className="hubCard" key={project.name}><small>0{index + 1} / {project.tag}</small><h3>{project.name}</h3><p>{project.detail}</p></article>)}</div></section><section className="hubSection hubPosts" id="posts"><div className="hubSectionHeading"><p className="hubEyebrow">04 / PUBLICACIONES</p><h2>En preparación</h2><Link href="/posts">Ir a publicaciones →</Link></div><p>Notas de desarrollo, changelogs y novedades estarán disponibles aquí.</p></section><Footer /></main>;
 }

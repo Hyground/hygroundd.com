@@ -1,0 +1,3 @@
+import { Header } from "@/components/layout/Header";
+
+export default async function ProjectsPage() { return <main className="hubShell"><Header /><section className="hubListing"><p className="hubEyebrow">02 / PROYECTOS</p><h1>PROJECTS</h1><p>Proyectos personales y comerciales de Hygroundd.</p><div className="hubCards"><article className="hubCard"><small>01 / PERSONAL</small><h3>Hygroundd Hub</h3><p>Plataforma central de herramientas, proyectos y publicaciones.</p></article><article className="hubCard"><small>02 / PERSONAL</small><h3>Card Manager</h3><p>Gestor de crédito con modo demo y espacio privado.</p></article></div></section></main>; }
